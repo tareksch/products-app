@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { products } from '../model/products.model';
+import { Orders } from '../model/orders.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
-  
+export class OrdersService {
+
   constructor(private http:HttpClient) { }
 
-  getProducts(): Observable<Array<products>> {
-    return this.http.get<Array<products>>('assets/client-json/porducts.json');
+  getOrders(): Observable<Array<Orders>> {
+    return this.http.get<Array<Orders>>('assets/client-json/orders.json');
 }
-
-
 }

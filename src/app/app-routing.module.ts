@@ -4,24 +4,22 @@ import { ProductsComponent } from './modules/product/component/products/products
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'Products',
+    redirectTo: 'products',
     pathMatch: 'full'
   },
   {
-    path: '',
-    component: ProductsComponent,
-    data: {
-      title: 'Products'
-    },
-    children: [
-      {
-        path: 'Products',
-        loadChildren: () =>
-          import('./modules/product/products.module').then((m) => m.ProductsModule)
-      },
-    ]
+    path: 'products',
+    loadChildren: () =>
+      import('./modules/product/products.module').then((m) => m.ProductsModule)
   },
-  { path: '**', redirectTo: 'Products' }
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./modules/Orders/orders.module').then((m) => m.OrdersModule)
+  }
+  ,
+  { path: '**', redirectTo: 'products' }
+
 ];
 
 @NgModule({

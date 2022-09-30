@@ -20,6 +20,5 @@ export class ProductsComponent implements OnInit {
     this.productsService.getProducts().subscribe(res => {
       this.products.push(...res)
     })
-    console.log(this.products)
   }
 }

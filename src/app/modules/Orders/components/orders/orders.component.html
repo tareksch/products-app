@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Payment Type</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let orders of ordersList; let i = index">
+        <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{orders.OrderDate}}</td>
+            <td><span *ngFor="let product of orders.Products">{{product.Quantity}}</span></td>
+            <td>{{orders.PaymentType}}</td>
+            <td>{{orders.totalPrice}}</td>
+        </tr>
+    </tbody>
+</table>
