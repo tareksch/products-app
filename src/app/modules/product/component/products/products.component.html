@@ -1,0 +1,14 @@
+<div class="row d-flex align-items-center justify-content-center" >
+    <div class="card m-2" *ngFor="let product of products">
+        <img class="card-img-top" src="{{product.ProductImg}}" alt="">
+        <div class="card-body" [ngClass]="{'few-Pieces':product.AvailablePieces < 10}">
+            <h5 class="card-title">Name: {{product.ProductName}}</h5>
+            <p class="card-text">Prics: {{product.ProductPrice |currency}}</p>
+            <p class="card-text">AvailablePieces: {{product.AvailablePieces}}</p>
+
+            <div class="d-flex justify-content-between"><a href="#" class="btn btn-primary">Details</a>
+                <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
+        </div>
+    </div>
+</div>
