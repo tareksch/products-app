@@ -1,0 +1,33 @@
+<div class="container">
+    <h4>Details</h4>
+    <div class="details-container ">
+        <div class="d-flex flex-column m-4">
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Order Date: </p>{{orderDetails?.OrderDate|date}} 
+            </span>
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Payment Type: </p>{{orderDetails?.PaymentType}} 
+            </span>
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Total Quantity: </p>{{totalQuantity}} 
+            </span>
+        </div>
+        <div class="d-flex flex-column m-4">
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Name: </p>{{selectedUser?.Name}} 
+            </span>
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Email: </p>{{selectedUser?.Email}} 
+            </span>
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Phone: </p>{{selectedUser?.Phone}} 
+            </span>
+            <span class="d-flex flex-row ">
+                <p class="mx-2">Address: </p>{{selectedUser?.Address}} 
+            </span>
+            <span class="d-flex flex-row mx-2">
+                <p>Register Date: </p>{{selectedUser?.RegisterDate}} 
+            </span>
+        </div>
+    </div>
+</div>

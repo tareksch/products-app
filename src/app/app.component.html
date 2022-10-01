@@ -1,6 +1,9 @@
 <nav class="topnav d-flex justify-content-between">
   <h4>Products App</h4>
-  <a class="active" [routerLink]="'products'">Home</a>
+  <span>
+  <a  [routerLinkActive]="'active'" [routerLink]="'products'">Products</a>
+  <a  [routerLinkActive]="'active'" [routerLink]="'orders'">Orders</a>
+</span>
 </nav>
 <div class="container  m-4">
   <router-outlet></router-outlet>
