@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { products } from '../../model/products.model';
 import { ProductsService } from '../../services/products.service';
 import { AddNewOrderComponent } from '../../_popups/add-new-order/add-new-order.component';
@@ -17,17 +18,12 @@ export class ProductsComponent implements OnInit {
 
   
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProductsList()
+    this.products =this.route.snapshot.data['products'];
   }
 
-  getProductsList() {
-    this.productsService.getProducts().subscribe(res => {
-      this.products.push(...res)
-    })
-  }
 
   selectProducts(products: products) {
     this.selectedProducts.push(products)

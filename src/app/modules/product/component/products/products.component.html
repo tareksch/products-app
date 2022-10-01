@@ -1,6 +1,6 @@
 <div class="row d-flex align-items-center justify-content-center">
     <div>
-<i (click)="openModal()" class="fas fa-shopping-cart" style="font-size:24px"></i>
+        <i (click)="openModal()" class="fas fa-shopping-cart" style="font-size:24px"></i>
         <span class='badge badge-warning' id='lblCartCount'> {{selectProducts.length}} </span>
     </div>
     <div class="card m-2" *ngFor="let product of products">
@@ -12,8 +12,8 @@
 
             <div class="d-flex justify-content-between">
                 <a (click)="selectProducts(product)" class="btn btn-primary">Add to cart</a>
-                <span class="col-1 pointer" *ngIf="product.AvailablePieces <= 10"> <i (click)="openEditQuantity(product)"
-                    class="fas fa-edit m-2" cTooltip="Edit"></i></span>
+                <span class="col-1 pointer"> <i (click)="openEditQuantity(product)" class="fas fa-edit m-2"
+                        cTooltip="Edit"></i></span>
             </div>
         </div>
     </div>
