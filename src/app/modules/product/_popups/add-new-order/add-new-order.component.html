@@ -1,8 +1,8 @@
 <div #myModal class="popup-container">
     <div class="popup-content">
         <div *ngIf="!isCheckOut">
-            <h4>shopping Cart</h4>
-            <table class="table">
+            <h4>Shopping Cart</h4>
+            <table class="table table-responsive-md">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -22,73 +22,78 @@
         <div *ngIf="isCheckOut">
             <h4>Checkout</h4>
             <div class=" d-flex justify-content-center align-items-center">
-            <form [formGroup]="form" class=" border">
-                <div class="m-2">
-                    <label for="Name">Name</label>
-                    <input formControlName="Name" type="text" class="form-control" placeholder="enter Your Name"
-                        aria-label="Name" aria-describedby="basic-addon1">
-                    <div *ngIf="form.get('Name')?.invalid && (form.get('Name')?.dirty || form.get('Name')?.touched)">
-                        <div class="error_validation" *ngIf="form.get('Name')?.errors?.['required']">
-                            Name is required.
-                        </div>
-                        <div class="error_validation" *ngIf="form.get('Name')?.errors?.['minlength']">
-                            Name must be at least 2 characters long.
-                        </div>
-                    </div>
-                </div>
-                <div class="m-2">
-                    <label for="Email">Email</label>
-                    <input formControlName="Email" type="text" class="form-control" placeholder="enter Your Email"
-                        aria-label="Email" aria-describedby="basic-addon1">
-                    <div *ngIf="form.get('Email')?.invalid && (form.get('Email')?.dirty || form.get('Email')?.touched)">
-                        <div class="error_validation" *ngIf="form.get('Email')?.errors?.['required']">
-                            Email is required.
-                        </div>
-                        <div class="error_validation" *ngIf="form.get('Email')?.errors?.['email']">
-                            Invalid Email
+                <form [formGroup]="form" class=" border">
+                    <div class="m-2">
+                        <label for="Name">Name</label>
+                        <input formControlName="Name" type="text" class="form-control" placeholder="enter Your Name"
+                            aria-label="Name" aria-describedby="basic-addon1">
+                        <div
+                            *ngIf="form.get('Name')?.invalid && (form.get('Name')?.dirty || form.get('Name')?.touched)">
+                            <div class="error_validation" *ngIf="form.get('Name')?.errors?.['required']">
+                                Name is required.
+                            </div>
+                            <div class="error_validation" *ngIf="form.get('Name')?.errors?.['minlength']">
+                                Name must be at least 2 characters long.
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="m-2">
-                    <label for="Address">Address</label>
-                    <input formControlName="Address" type="text" class="form-control" placeholder="enter Your Address"
-                        aria-label="Address" aria-describedby="basic-addon1">
-                    <div
-                        *ngIf="form.get('Address')?.invalid && (form.get('Address')?.dirty || form.get('Address')?.touched)">
-                        <div class="error_validation" *ngIf="form.get('Address')?.errors?.['required']">
-                            Address is required.
-                        </div>
-                        <div class="error_validation" *ngIf="form.get('Address')?.errors?.['minlength']">
-                            Address must be at least 4 characters long.
-                        </div>
-                    </div>
-                </div>
-                <div class="m-2">
-                    <label for="paymentMethod">Payment Method</label>
-                    <select  formControlName="paymentMethod" aria-label="payment method" class="form-control m-1">
-                        <option disabled Value="">Select payment method</option>
-                        <option> Cash</option>
-                        <option>Online</option>
-                    </select>
-                    <div
-                        *ngIf="form.get('paymentMethod')?.invalid && (form.get('paymentMethod')?.dirty || form.get('paymentMethod')?.touched)">
-                        <div class="error_validation" *ngIf="form.get('paymentMethod')?.errors?.['required']">
-                            Payment Method is required.
+                    <div class="m-2">
+                        <label for="Email">Email</label>
+                        <input formControlName="Email" type="text" class="form-control" placeholder="enter Your Email"
+                            aria-label="Email" aria-describedby="basic-addon1">
+                        <div
+                            *ngIf="form.get('Email')?.invalid && (form.get('Email')?.dirty || form.get('Email')?.touched)">
+                            <div class="error_validation" *ngIf="form.get('Email')?.errors?.['required']">
+                                Email is required.
+                            </div>
+                            <div class="error_validation" *ngIf="form.get('Email')?.errors?.['email']">
+                                Invalid Email
+                            </div>
                         </div>
                     </div>
+                    <div class="m-2">
+                        <label for="Address">Address</label>
+                        <input formControlName="Address" type="text" class="form-control"
+                            placeholder="enter Your Address" aria-label="Address" aria-describedby="basic-addon1">
+                        <div
+                            *ngIf="form.get('Address')?.invalid && (form.get('Address')?.dirty || form.get('Address')?.touched)">
+                            <div class="error_validation" *ngIf="form.get('Address')?.errors?.['required']">
+                                Address is required.
+                            </div>
+                            <div class="error_validation" *ngIf="form.get('Address')?.errors?.['minlength']">
+                                Address must be at least 4 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-2">
+                        <label for="paymentMethod">Payment Method</label>
+                        <select formControlName="paymentMethod" aria-label="payment method" class="form-control m-1">
+                            <option disabled Value="">Select payment method</option>
+                            <option> Cash</option>
+                            <option>Online</option>
+                        </select>
+                        <div
+                            *ngIf="form.get('paymentMethod')?.invalid && (form.get('paymentMethod')?.dirty || form.get('paymentMethod')?.touched)">
+                            <div class="error_validation" *ngIf="form.get('paymentMethod')?.errors?.['required']">
+                                Payment Method is required.
+                            </div>
+                        </div>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
-        </div>
-        <span class="d-flex justify-content-end mx-4">Total Price:{{totalPrice}}</span>
+        <span class="d-flex justify-content-end mx-4" *ngIf="selectedProducts.length >0">Total
+            Price:{{totalPrice}}</span>
         <div class="d-flex justify-content-center align-items-center"> <b *ngIf="selectedProducts.length <=0"> You
                 didn't make any orders</b></div>
         <hr>
         <div class="d-flex justify-content-end">
             <button class="btn btn-secondary mx-2" (click)="close()">Close</button>
-            <button *ngIf="!isCheckOut && selectedProducts.length >0" class="btn btn-primary" (click)="openCheckOut()">Check Out</button>
-            <button *ngIf="isCheckOut && selectedProducts.length >0" class="btn btn-primary" (click)="Buy()">Buy</button>
+            <button *ngIf="!isCheckOut && selectedProducts.length >0" class="btn btn-primary"
+                (click)="openCheckOut()">Check Out</button>
+            <button *ngIf="isCheckOut && selectedProducts.length >0" class="btn btn-primary"
+                (click)="Buy()">Buy</button>
         </div>
     </div>
 </div>

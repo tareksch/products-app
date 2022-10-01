@@ -1,11 +1,11 @@
-<nav class="topnav d-flex justify-content-between">
-  <h4>Products App</h4>
-  <span>
-  <a  [routerLinkActive]="'active'" [routerLink]="'products'">Products</a>
-  <a  [routerLinkActive]="'active'" [routerLink]="'orders'">Orders</a>
-</span>
-</nav>
-<div class="container  m-4">
+<div class="header">
+  <a href="#default" class="logo">Products App</a>
+  <div class="header-right">
+    <a [routerLinkActive]="'active'" [routerLink]="'products'">Products</a>
+    <a [routerLinkActive]="'active'" [routerLink]="'orders'">Orders</a>
+  </div>
+</div>
+<div class="container">
   <router-outlet></router-outlet>
 </div>
 <footer class="footer"> <span class="mx-2">products@app.com</span> 

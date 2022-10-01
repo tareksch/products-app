@@ -1,20 +1,22 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Order Date</th>
-            <th scope="col">Payment Type</th>
-            <th scope="col">Total Price</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let orders of ordersList; let i = index">
-        <tr>
-            <th scope="row">{{i+1}}</th>
-            <td>{{orders.OrderDate}}</td>
-            <td>{{orders.PaymentType}}</td>
-            <td>{{orders.totalPrice | number : '1.2-2'}}</td>
-            <td ><i (click)="openOrderDetails(orders.OrderId)" class="fas fa-info-circle"></i></td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive-md">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Payment Type</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let orders of ordersList; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{orders.OrderDate}}</td>
+                <td>{{orders.PaymentType}}</td>
+                <td>{{orders.totalPrice | number : '1.2-2'}}</td>
+                <td><i (click)="openOrderDetails(orders.OrderId)" class="fas fa-info-circle"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
