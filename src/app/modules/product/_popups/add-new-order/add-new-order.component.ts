@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Orders } from 'src/app/modules/Orders/model/orders.model';
+import { Orders, Users } from 'src/app/modules/Orders/model/orders.model';
 import { OrdersService } from 'src/app/modules/Orders/services/orders.service';
 import { products } from '../../model/products.model';
 
@@ -14,18 +14,20 @@ export class AddNewOrderComponent implements OnInit {
   @ViewChild('myModal', { static: false }) modal!: ElementRef;
 
   selectedProducts: products[] = [];
+  users!: Users;
+  order!: Orders
   totalPrice: number = 0;
   isCheckOut: boolean = false;
   form!: FormGroup
 
-  constructor(private fb: FormBuilder,private ordersService:OrdersService) { }
+  constructor(private fb: FormBuilder, private ordersService: OrdersService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       Name: ['', [Validators.required, Validators.minLength(2)]],
-      Email: ['', [Validators.required,Validators.email]],
+      Email: ['', [Validators.required, Validators.email]],
       Address: ['', [Validators.required, Validators.minLength(2)]],
-      paymentMethod: ['',[Validators.required]],
+      paymentMethod: ['', [Validators.required]],
     })
   }
 
@@ -58,9 +60,16 @@ export class AddNewOrderComponent implements OnInit {
     this.isCheckOut = !this.isCheckOut
   }
 
-  Buy(){
+  Buy() {
     this.form.markAllAsTouched();
-    if (this.form.invalid)return;
-      this.ordersService.addOrder(this.form.getRawValue() as Orders)
+    if (this.form.invalid) return;
+    this.users.Name = this.form.get('Name')?.value
+    this.users.Email = this.form.get('Email')?.value
+    this.users.Phone = this.form.get('Phone')?.value
+    this.users.Address = this.form.get('Address')?.value
+    this.order?.Products.filter(x=>{
+     x.ProductId 
+    }) 
+    this.ordersService.addOrder(this.order, this.users)
   }
 }

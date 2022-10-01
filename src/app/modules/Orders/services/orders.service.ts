@@ -8,6 +8,7 @@ import { Orders, Users } from '../model/orders.model';
 })
 export class OrdersService {
   orders: Array<Orders> = [];
+  users: Array<Users> = [];
 
   constructor(private http: HttpClient) { }
 
@@ -22,10 +23,16 @@ export class OrdersService {
   }
 
   getUsers(): Observable<Array<Users>> {
-    return this.http.get<Array<Users>>('assets/client-json/users.json');
+    return this.http.get<Array<Users>>('assets/client-json/users.json').pipe(
+      map(result => {
+        this.users = result;
+        return this.users
+      })
+    );
   }
 
-  addOrder(order: Orders) {
+  addOrder(order: Orders,user:Users) {
     this.orders.push(order);
+    this.users.push(user);
   }
 }

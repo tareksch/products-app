@@ -4,7 +4,8 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
-import { OrdersResolver } from './services/resolver/orders.resolver';
+import { OrdersResolver } from './services/order-resolver/orders.resolver';
+import { UsersResolver } from './services/user-resolver/users.resolver';
 
 
 
@@ -16,6 +17,6 @@ import { OrdersResolver } from './services/resolver/orders.resolver';
     OrdersRoutingModule,
     HttpClientModule
     
-  ], providers: [OrdersResolver]
+  ], providers: [OrdersResolver,UsersResolver]
 })
 export class OrdersModule { }

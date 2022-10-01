@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Orders, Users } from '../../model/orders.model';
+import { Orders, Products, Users } from '../../model/orders.model';
 import { OrdersService } from '../../services/orders.service';
 import { Location } from '@angular/common';
 
@@ -16,51 +16,42 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails?: Orders;
   totalQuantity?: number;
   users: Users[] = [];
-  selectedUser?: Users
+  selectedUser?: Users;
+  products:Products[]=[]
 
-  constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute, private ordersService: OrdersService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private activatedRoute: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.orderId = params["orderId"];
       this.ordersList = this.route.snapshot.data['orders'];
+      this.users = this.route.snapshot.data['users'];
     })
-    
+
     this.getOrderDetails();
     this.getUserById();
-    this.calculateQuantity()
+    this.calculateQuantitySum()
   }
 
 
-
-  
-
   getOrderDetails() {
-    this.ordersList.find(order=>{
-      if(order.OrderId == this.orderId){
+    this.ordersList.find(order => {
+      if (order.OrderId == this.orderId) {
         this.orderDetails = order
       }
     })
-     
+
   }
 
-  getAllUsers() {
-    this.ordersService.getUsers().subscribe(res => {
-      this.users = res;
-    })
-  }
-
-  calculateQuantity() {
-    this.orderDetails?.Products.forEach(x => {
-      x.Quantity = +x.Quantity
-      this.totalQuantity =+ x.Quantity
-      console.log(this.totalQuantity)
-    })
+  calculateQuantitySum() {
+    this.totalQuantity = this.orderDetails?.Products.reduce((a, b) => a + b.Quantity, 0)
   }
 
   getUserById() {
-    this.selectedUser = this.users.find(user => {
-      user.Id === this.orderDetails?.UserId
+    this.users.find(user => {
+      if (user.Id === this.orderDetails?.UserId) {
+        this.selectedUser = user
+      }
     })
   }
 

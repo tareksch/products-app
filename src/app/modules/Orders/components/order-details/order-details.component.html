@@ -1,11 +1,11 @@
 <div class="container">
     <span class="d-flex justify-content-between">
-        <h4>Order Details</h4> <button class="btn btn-primary" (click)="back()">Back</button>
+        <h4 class="m-2">Order Details</h4> <button class="btn btn-primary m-2" (click)="back()">Back</button>
     </span>
     <div class="details-container ">
-        <div class="d-flex flex-column m-4">
-            <span class="d-flex flex-row ">
-                <p class="mx-2">Order Date: </p>{{orderDetails?.OrderDate|date}}
+        <div class="d-flex flex-column m-4 w-50">
+            <span class="d-flex flex-row">
+                <p class="mx-1">Order Date: </p>{{orderDetails?.OrderDate|date}}
             </span>
             <span class="d-flex flex-row ">
                 <p class="mx-2">Payment Type: </p>{{orderDetails?.PaymentType}}
@@ -14,7 +14,7 @@
                 <p class="mx-2">Total Quantity: </p>{{totalQuantity}}
             </span>
         </div>
-        <div class="d-flex flex-column m-4">
+        <div class="d-flex flex-column m-4 w-100">
             <span class="d-flex flex-row ">
                 <p class="mx-2">Name: </p>{{selectedUser?.Name}}
             </span>
@@ -27,8 +27,8 @@
             <span class="d-flex flex-row ">
                 <p class="mx-2">Address: </p>{{selectedUser?.Address}}
             </span>
-            <span class="d-flex flex-row mx-2">
-                <p>Register Date: </p>{{selectedUser?.RegisterDate}}
+            <span class="d-flex flex-row">
+                <p class=" mx-2">Register Date: </p>{{selectedUser?.RegisterDate|date}}
             </span>
         </div>
     </div>
