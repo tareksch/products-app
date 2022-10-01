@@ -12,6 +12,7 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
+  //Get orders data from orders.json and added the new order  
   getOrders(): Observable<Array<Orders>> {
     if (this.orders.length > 0) return of(this.orders);
     return this.http.get<Array<Orders>>('assets/client-json/orders.json').pipe(
@@ -21,7 +22,7 @@ export class OrdersService {
       })
     );
   }
-
+  //Get user data from user.json and added the new user 
   getUsers(): Observable<Array<Users>> {
     return this.http.get<Array<Users>>('assets/client-json/users.json').pipe(
       map(result => {
@@ -31,6 +32,7 @@ export class OrdersService {
     );
   }
 
+  //Add new order and user from the component
   addOrder(order: Orders,user:Users) {
     this.orders.push(order);
     this.users.push(user);

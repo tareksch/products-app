@@ -21,15 +21,13 @@ export class OrdersComponent implements OnInit {
     private productsService: ProductsService,
     private router: Router, private route: ActivatedRoute) { }
 
+  //Fetch data from resolver
   ngOnInit(): void {
     this.ordersList = this.route.snapshot.data['orders'];
     this.products = this.route.snapshot.data['products'];
     this.calcPriceForEachOrder();
   }
-
-
-
-
+  //Calculate the total price for each order
   calcPriceForEachOrder() {
     this.ordersList.forEach(o => {
       let totalPrice: number = 0;
@@ -45,7 +43,7 @@ export class OrdersComponent implements OnInit {
       o.totalPrice = totalPrice;
     });
   }
-
+  //Navigate to order details page with the orderId
   openOrderDetails(OrderId: number) {
     this.router.navigate(['orders/order-details/' + OrderId])
   }

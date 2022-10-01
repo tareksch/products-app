@@ -11,20 +11,20 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const clonedRequest = request.clone({
       url: this.completeUrl(request.url)
-  });
-  return next.handle(clonedRequest);
+    });
+    return next.handle(clonedRequest);
   }
-
+  //set (http://4200) to all the api 
   private completeUrl(url: string) {
     if (url.indexOf('http://') >= 0 || url.indexOf('https://') >= 0) {
-        return url;
+      return url;
     } else {
-        return environment.BASE_URL + url;
+      return environment.BASE_URL + url;
     }
-}
+  }
 }

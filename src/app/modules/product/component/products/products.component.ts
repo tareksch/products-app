@@ -18,23 +18,23 @@ export class ProductsComponent implements OnInit {
 
   
 
-  constructor(private productsService: ProductsService,private route: ActivatedRoute) { }
-
+  constructor(private route: ActivatedRoute) { }
+//Fetch data from resolver
   ngOnInit(): void {
     this.products =this.route.snapshot.data['products'];
   }
 
-
+//Add products to the cart
   selectProducts(products: products) {
     this.selectedProducts.push(products)
   }
-
+//Open cart popup
   openModal() {
     this.newOrder.open();
     this.newOrder.selecedProduct(this.selectedProducts)
   }
   
-
+//Open edit quantity popup
   openEditQuantity(products: products){
     this.editQuantity.open();
     this.editQuantity.editProduct(products)

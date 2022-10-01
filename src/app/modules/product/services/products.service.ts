@@ -9,7 +9,7 @@ import { products } from '../model/products.model';
 export class ProductsService {
   products: products[] = [];
   constructor(private http: HttpClient) { }
-
+//Fetch data from porducts.json
   getProducts(): Observable<Array<products>> {
     if (this.products.length > 0) return of(this.products);
     return this.http.get<Array<products>>('assets/client-json/porducts.json').pipe(
@@ -19,7 +19,7 @@ export class ProductsService {
       })
     );
   }
-
+//Add edited quantities to the products list
 editQuantities(product:products){
   this.products.push(product)
 }

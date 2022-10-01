@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Orders, Products, Users } from '../../model/orders.model';
-import { OrdersService } from '../../services/orders.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -17,23 +16,22 @@ export class OrderDetailsComponent implements OnInit {
   totalQuantity?: number;
   users: Users[] = [];
   selectedUser?: Users;
-  products:Products[]=[]
+  products: Products[] = []
 
   constructor(private route: ActivatedRoute, private activatedRoute: ActivatedRoute, private location: Location) { }
-
+  // Get orderId from route and fetch data from resolver
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.orderId = params["orderId"];
       this.ordersList = this.route.snapshot.data['orders'];
       this.users = this.route.snapshot.data['users'];
     })
-
     this.getOrderDetails();
     this.getUserById();
     this.calculateQuantitySum()
   }
 
-
+//Get selected order details
   getOrderDetails() {
     this.ordersList.find(order => {
       if (order.OrderId == this.orderId) {
@@ -42,11 +40,12 @@ export class OrderDetailsComponent implements OnInit {
     })
 
   }
-
+// calculate the sum of all the quantity
   calculateQuantitySum() {
     this.totalQuantity = this.orderDetails?.Products.reduce((a, b) => a + b.Quantity, 0)
   }
 
+  //Get selected user for order details
   getUserById() {
     this.users.find(user => {
       if (user.Id === this.orderDetails?.UserId) {
@@ -54,7 +53,7 @@ export class OrderDetailsComponent implements OnInit {
       }
     })
   }
-
+//Navigate to the previous url
   back() {
     this.location.back()
   }
