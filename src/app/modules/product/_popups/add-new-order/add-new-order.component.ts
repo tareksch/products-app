@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Orders } from 'src/app/modules/Orders/model/orders.model';
+import { OrdersService } from 'src/app/modules/Orders/services/orders.service';
 import { products } from '../../model/products.model';
 
 @Component({
@@ -16,7 +18,7 @@ export class AddNewOrderComponent implements OnInit {
   isCheckOut: boolean = false;
   form!: FormGroup
 
-  constructor(private fb: FormBuilder,) { }
+  constructor(private fb: FormBuilder,private ordersService:OrdersService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -58,7 +60,7 @@ export class AddNewOrderComponent implements OnInit {
 
   Buy(){
     this.form.markAllAsTouched();
-    if (this.form.invalid)
-      return;
+    if (this.form.invalid)return;
+      this.ordersService.addOrder(this.form.getRawValue() as Orders)
   }
 }

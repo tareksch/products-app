@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Orders, Users } from '../../model/orders.model';
 import { OrdersService } from '../../services/orders.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-order-details',
@@ -13,33 +14,34 @@ export class OrderDetailsComponent implements OnInit {
   orderId?: number;
   ordersList: Orders[] = [];
   orderDetails?: Orders;
-  totalQuantity: any;
+  totalQuantity?: number;
   users: Users[] = [];
   selectedUser?: Users
 
-  constructor(private activatedRoute: ActivatedRoute, private ordersService: OrdersService) { }
+  constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute, private ordersService: OrdersService, private location: Location) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.orderId = params["orderId"];
-      this.getAllOrders()
-
+      this.ordersList = this.route.snapshot.data['orders'];
     })
+    
     this.getOrderDetails();
     this.getUserById();
+    this.calculateQuantity()
   }
 
-  getAllOrders() {
-    this.ordersService.getOrders().subscribe(res => {
-      this.ordersList = res;
-    })
 
-  }
+
+  
 
   getOrderDetails() {
-    this.orderDetails = this.ordersList.find(order => {
-      order.OrderId === this.orderId;
+    this.ordersList.find(order=>{
+      if(order.OrderId == this.orderId){
+        this.orderDetails = order
+      }
     })
+     
   }
 
   getAllUsers() {
@@ -50,7 +52,9 @@ export class OrderDetailsComponent implements OnInit {
 
   calculateQuantity() {
     this.orderDetails?.Products.forEach(x => {
-      this.totalQuantity = +x.Quantity
+      x.Quantity = +x.Quantity
+      this.totalQuantity =+ x.Quantity
+      console.log(this.totalQuantity)
     })
   }
 
@@ -58,6 +62,10 @@ export class OrderDetailsComponent implements OnInit {
     this.selectedUser = this.users.find(user => {
       user.Id === this.orderDetails?.UserId
     })
+  }
+
+  back() {
+    this.location.back()
   }
 
 }

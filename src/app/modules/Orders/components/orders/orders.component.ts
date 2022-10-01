@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { products } from 'src/app/modules/product/model/products.model';
 import { ProductsService } from 'src/app/modules/product/services/products.service';
 import { Orders, Products } from '../../model/orders.model';
@@ -13,49 +13,37 @@ import { OrdersService } from '../../services/orders.service';
 export class OrdersComponent implements OnInit {
   ordersList: Orders[] = [];
   products: products[] = [];
-  productsList: Products[] = [];
   isOrderLoading: boolean = false
   isProductLoading: boolean = false
+  orderedProducts: Products[] = [];
 
   constructor(private ordersService: OrdersService,
-     private productsService: ProductsService, 
-     private router: Router) { }
+    private productsService: ProductsService,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getOrdersList()
-    this.getProductsList();
+    this.ordersList = this.route.snapshot.data['orders'];
+    this.products = this.route.snapshot.data['products'];
+    this.calcPriceForEachOrder();
   }
 
-  getOrdersList() {
-    this.ordersService.getOrders().subscribe(res => {
-      this.ordersList = res;
-      this.getProductsList()
-    })
-  }
 
-  getProductsList() {
-    this.productsService.getProducts().subscribe(res => {
-      this.products = res;
-    })
-    this.getPriceForEactOrder();
-  }
 
-  getPriceForEactOrder() {
-    this.products.forEach(product => {
-      this.ordersList.forEach(e => e.Products.forEach(p => {
-        if (p.ProductId === product.ProductId) {
-          p.price = product.ProductPrice;
+
+  calcPriceForEachOrder() {
+    this.ordersList.forEach(o => {
+      let totalPrice: number = 0;
+      o.Products.forEach(p => {
+        let productDetails = this.products.find(x => x.ProductId === p.ProductId);
+        if (productDetails) {
+          totalPrice += p.Quantity * productDetails.ProductPrice;
         }
-      }
-      ))
-    })
-    let totalPrice: number;
-    this.ordersList.forEach(o => o.Products.forEach(p => {
-      totalPrice += p.Quantity * p.price
-      o.totalPrice = totalPrice;
-    }
 
-    ))
+      }
+
+      );
+      o.totalPrice = totalPrice;
+    });
   }
 
   openOrderDetails(OrderId: number) {

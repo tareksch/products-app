@@ -3,7 +3,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Order Date</th>
-            <th scope="col">Quantity</th>
             <th scope="col">Payment Type</th>
             <th scope="col">Total Price</th>
             <th scope="col">Actions</th>
@@ -13,7 +12,6 @@
         <tr>
             <th scope="row">{{i+1}}</th>
             <td>{{orders.OrderDate}}</td>
-            <td><span *ngFor="let product of orders.Products">{{product.Quantity}}</span></td>
             <td>{{orders.PaymentType}}</td>
             <td>{{orders.totalPrice}}</td>
             <td ><i (click)="openOrderDetails(orders.OrderId)" class="fas fa-info-circle"></i></td>
