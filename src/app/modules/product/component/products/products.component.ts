@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { products } from '../../model/products.model';
 import { ProductsService } from '../../services/products.service';
 import { AddNewOrderComponent } from '../../_popups/add-new-order/add-new-order.component';
+import { EditQuantityComponent } from '../../_popups/edit-quantity/edit-quantity.component';
 
 @Component({
   selector: 'app-products',
@@ -11,7 +12,8 @@ import { AddNewOrderComponent } from '../../_popups/add-new-order/add-new-order.
 export class ProductsComponent implements OnInit {
   products: products[] = [];
   selectedProducts: products[] = [];
-  @ViewChild('modal', {static: false}) modal!: AddNewOrderComponent
+  @ViewChild('newOrder', {static: false}) newOrder!: AddNewOrderComponent
+  @ViewChild('editQuantity', {static: false}) editQuantity!: EditQuantityComponent
 
   
 
@@ -32,8 +34,14 @@ export class ProductsComponent implements OnInit {
   }
 
   openModal() {
-    this.modal.open();
-    this.modal.selecedProduct(this.selectedProducts)
+    this.newOrder.open();
+    this.newOrder.selecedProduct(this.selectedProducts)
   }
   
+
+  openEditQuantity(products: products){
+    this.editQuantity.open();
+    this.editQuantity.editProduct(products)
+  }
+
 }

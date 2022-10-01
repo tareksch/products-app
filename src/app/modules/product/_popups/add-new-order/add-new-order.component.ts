@@ -34,6 +34,7 @@ export class AddNewOrderComponent implements OnInit {
 
   close() {
     this.modal.nativeElement.style.display = 'none';
+    this.isCheckOut = false;
   }
 
   selecedProduct(selectedProducts: products[]) {
