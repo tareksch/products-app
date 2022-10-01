@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { products } from '../../model/products.model';
 import { ProductsService } from '../../services/products.service';
+import { AddNewOrderComponent } from '../../_popups/add-new-order/add-new-order.component';
 
 @Component({
   selector: 'app-products',
@@ -8,7 +9,11 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  products: products[] = []
+  products: products[] = [];
+  selectedProducts: products[] = [];
+  @ViewChild('modal', {static: false}) modal!: AddNewOrderComponent
+
+  
 
   constructor(private productsService: ProductsService) { }
 
@@ -21,4 +26,14 @@ export class ProductsComponent implements OnInit {
       this.products.push(...res)
     })
   }
+
+  selectProducts(products: products) {
+    this.selectedProducts.push(products)
+  }
+
+  openModal() {
+    this.modal.open();
+    this.modal.selecedProduct(this.selectedProducts)
+  }
+  
 }

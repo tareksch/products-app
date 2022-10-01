@@ -1,8 +1,8 @@
-<div class="row d-flex align-items-center justify-content-center" >
-   <div>
-    <i  class="fas fa-shopping-cart" style="font-size:24px"></i>
-<span class='badge badge-warning' id='lblCartCount'> 5 </span>
-</div>
+<div class="row d-flex align-items-center justify-content-center">
+    <div>
+<i (click)="openModal()" class="fas fa-shopping-cart" style="font-size:24px"></i>
+        <span class='badge badge-warning' id='lblCartCount'> {{selectProducts.length}} </span>
+    </div>
     <div class="card m-2" *ngFor="let product of products">
         <img class="card-img-top" src="{{product.ProductImg}}" alt="">
         <div class="card-body" [ngClass]="{'few-Pieces':product.AvailablePieces < 10}">
@@ -10,9 +10,10 @@
             <p class="card-text">Prics: {{product.ProductPrice |currency}}</p>
             <p class="card-text">AvailablePieces: {{product.AvailablePieces}}</p>
 
-            <div class="d-flex justify-content-between"><a href="#" class="btn btn-primary">Details</a>
-                <a  class="btn btn-primary">Add to cart</a>
+            <div class="d-flex justify-content-between">
+                <a (click)="selectProducts(product)" class="btn btn-primary">Add to cart</a>
             </div>
         </div>
     </div>
 </div>
+<app-add-new-order #modal></app-add-new-order>

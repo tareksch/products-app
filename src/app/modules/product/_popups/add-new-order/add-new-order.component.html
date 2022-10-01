@@ -1,0 +1,92 @@
+<div #myModal class="container">
+    <div class="content">
+        <div *ngIf="!isCheckOut">
+            <h4>My Orders</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let orders of selectedProducts; let i = index">
+                    <tr>
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{orders.ProductName}}</td>
+                        <td>{{orders.ProductPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="isCheckOut">
+            <h4>Checkout</h4>
+            <form [formGroup]="form" class="col-4 border">
+                <div class="m-2">
+                    <label for="Name">Name</label>
+                    <input formControlName="Name" type="text" class="form-control" placeholder="enter Your Name"
+                        aria-label="Name" aria-describedby="basic-addon1">
+                    <div *ngIf="form.get('Name')?.invalid && (form.get('Name')?.dirty || form.get('Name')?.touched)">
+                        <div class="error_validation" *ngIf="form.get('Name')?.errors?.['required']">
+                            Name is required.
+                        </div>
+                        <div class="error_validation" *ngIf="form.get('Name')?.errors?.['minlength']">
+                            Name must be at least 2 characters long.
+                        </div>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="Email">Email</label>
+                    <input formControlName="Email" type="text" class="form-control" placeholder="enter Your Email"
+                        aria-label="Email" aria-describedby="basic-addon1">
+                    <div *ngIf="form.get('Email')?.invalid && (form.get('Email')?.dirty || form.get('Email')?.touched)">
+                        <div class="error_validation" *ngIf="form.get('Email')?.errors?.['required']">
+                            Email is required.
+                        </div>
+                        <div class="error_validation" *ngIf="form.get('Email')?.errors?.['email']">
+                            Invalid Email
+                        </div>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="Address">Address</label>
+                    <input formControlName="Address" type="text" class="form-control" placeholder="enter Your Address"
+                        aria-label="Address" aria-describedby="basic-addon1">
+                    <div
+                        *ngIf="form.get('Address')?.invalid && (form.get('Address')?.dirty || form.get('Address')?.touched)">
+                        <div class="error_validation" *ngIf="form.get('Address')?.errors?.['required']">
+                            Address is required.
+                        </div>
+                        <div class="error_validation" *ngIf="form.get('Address')?.errors?.['minlength']">
+                            Address must be at least 4 characters long.
+                        </div>
+                    </div>
+                </div>
+                <div class="m-2">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select  formControlName="paymentMethod" aria-label="payment method" class="form-control m-1">
+                        <option disabled Value="">Select payment method</option>
+                        <option> Cash</option>
+                        <option>Online</option>
+                    </select>
+                    <div
+                        *ngIf="form.get('paymentMethod')?.invalid && (form.get('paymentMethod')?.dirty || form.get('paymentMethod')?.touched)">
+                        <div class="error_validation" *ngIf="form.get('paymentMethod')?.errors?.['required']">
+                            Payment Method is required.
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <span class="d-flex justify-content-end mx-4">Total Price:{{totalPrice}}</span>
+        <div class="d-flex justify-content-center align-items-center"> <b *ngIf="selectedProducts.length <=0"> You
+                didn't make any orders</b></div>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary" (click)="close()">Close</button>
+            <button *ngIf="!isCheckOut || selectedProducts.length <=0" class="btn btn-primary" (click)="openCheckOut()">Check Out</button>
+            <button *ngIf="isCheckOut || selectedProducts.length <=0" class="btn btn-primary" (click)="Buy()">Buy</button>
+        </div>
+    </div>
+</div>

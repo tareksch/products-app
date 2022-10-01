@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './component/products/products.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddNewOrderComponent } from './_popups/add-new-order/add-new-order.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [ProductsComponent],
+  declarations: [ProductsComponent, AddNewOrderComponent],
   imports: [
-    CommonModule, ProductsRoutingModule,HttpClientModule
+    CommonModule, ProductsRoutingModule,HttpClientModule,ReactiveFormsModule
   ]
 })
 export class ProductsModule { }
